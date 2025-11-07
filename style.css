@@ -1,0 +1,659 @@
+/* === RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* === FUNDO FIXO === */
+body,
+html {
+  height: 100%;
+  overflow-x: hidden;
+  /* impede rolagem lateral */
+}
+
+/* Estilo base do título (use o seletor correto: .section-title, #empresarial h2, etc) */
+h2 {
+  font-family: "Motterdam", sans-serif;
+  font-size: 3rem;
+  font-weight: 100;
+  display: inline-block; /* importante para transform funcionar corretamente */
+  transition: transform 0.4s ease-in-out, text-shadow 0.4s ease-in-out;
+  color: #fff;
+}
+
+
+.background {
+  background: url('https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1762383379/essa_l5sw2y.png') no-repeat center center;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  transition: filter 0.5s ease;
+  z-index: 0;
+}
+
+.background.darkened {
+  filter: brightness(0.2);
+}
+
+/* === CONTEÚDO CENTRAL === */
+#main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+
+/* === TÍTULO PRINCIPAL === */
+.title {
+  font-size: 6rem;
+  font-family: "Motterdam", cursive;
+  font-weight: 100;
+  color: rgba(177, 178, 180, 0.9);
+  text-shadow: 0 4px 15px #000;
+  letter-spacing: 1.5px; /*distancia das letras leo souza */
+  line-height: 1.1;      /* aproxima as linhas */
+  margin-bottom: 0rem; /*distancia entre videomaker e leo souza*/
+  animation: fadeInDown 1s ease-in-out;
+}
+
+/* === SUBTÍTULO === */
+.subtitle {
+  font-family: "Motterdam", cursive;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: -1.5rem;   /* diminui o espaço */
+  color: rgba(146, 154, 172, 0.9);
+  text-shadow: 0 10px 8px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+
+@font-face {
+  font-family: 'Motterdam';
+  src: url('./fonts/Motterdam.otf') format('opentype'),
+       url('./fonts/Motterdam.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+/* === ANIMAÇÕES === */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === EFEITO LIQUID GLASS === */
+.glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.section.glass {
+  background: none;
+}
+
+#videos.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* === MENU E BOTÕES === */
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+  margin-top: 35px;
+  width: 100%;
+}
+
+.btn,
+.btnn {
+  padding: 1.5vh 4vw;
+  font-size: 1.1rem;
+  width: 45vw;
+  max-width: 250px;
+  min-width: 160px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.btn {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btnn {
+  background: rgba(0, 0, 0, 0.74);
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.btnn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* === SEÇÕES === */
+.section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  width: 80%;
+  max-width: 900px;
+  text-align: center;
+  padding: 40px;
+  z-index: 2;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* ✅ impede rolagem horizontal dentro da seção */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.hidden {
+  display: none !important;
+  opacity: 0;
+}
+
+/* === BOTÃO VOLTAR === */
+.back-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+/* === GALERIA === */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  /* ✅ mais flexível */
+  gap: 16px;
+  /* espaço uniforme */
+  margin: 20px auto 0;
+  width: 100%;
+  /* ✅ ocupa a largura disponível */
+  max-width: 95%;
+  box-sizing: border-box;
+  padding: 0 8px;
+  /* ✅ leve margem interna para evitar corte nas bordas */
+}
+
+.gallery img,
+.gallery video {
+  width: 100%;
+  /* ✅ ajusta automaticamente ao tamanho da coluna */
+  height: 150px;
+  border-radius: 15px;
+  object-fit: cover;
+  display: block;
+  /* ✅ remove possíveis espaços indesejados */
+  overflow: hidden; /* 🔥 impede o vídeo de ultrapassar o border-radius */
+}
+
+/* === CONTATO === */
+.whatsapp {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.whatsapp:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* === CASAMENTOS / BANNERS === */
+#casamentos .banners-container {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 20px 50px;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  min-height: 60vh;
+}
+
+#casamentos .banner {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-shadow: 0 0 5px black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#casamentos .banner.anaeadilio {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1761946770/15_mafq1s.jpg');
+}
+
+#casamentos .banner.cesarjuliana {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1761946821/20_roxqqu.jpg');
+}
+
+#casamentos .banner.karinaediogo {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1761946731/16_rqklcv.jpg');
+}
+
+#casamentos .banner.pedroeemile {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1761946657/17_hfuljr.jpg');
+}
+
+#casamentos .banner.renatarichard {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1761946607/12_jdsml0.jpg');
+}
+
+#casamentos .banner.alanale {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1761946581/16_fcfdp7.jpg');
+}
+
+#empresarial .banner.empresarial {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Assets/Alan-Alessandra/15.jpg');
+}
+
+
+
+.banner.assessoria-bem-estar {
+  background-image: url("https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1761946759/1_xx3cql.jpg");
+}
+
+.banner.assessoria-be {
+  background-image: url("https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1761946523/FOTOS-63_va7ti8.jpg");
+}
+
+
+
+/* === MODAL DE IMAGEM === */
+#imageModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+}
+
+#imageModal.hidden {
+  display: none;
+}
+
+#imageModal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+#closeModal {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+
+/* === BANNERS / GALERIA MOBILE === */
+@media (max-width: 820px) {
+  .background {
+    background: url('https://res.cloudinary.com/dawyekes7/image/upload/f_auto,q_auto:best/v1762440520/essaa_mreyun.png') no-repeat center center;
+    background-size: cover;
+  }
+
+  .menu {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    justify-items: center;
+  }
+
+  .gallery img,
+  .gallery video {
+    max-width: 160px;
+  }
+
+  #casamentos .banners-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  #casamentos .banner {
+    width: 90%;
+    height: 200px;
+    margin: 0 auto;
+  }
+}
+
+#sobre h2 {
+  font-size: 2.5rem;       /* Título */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#sobre p {
+  text-align: justify;          /* Alinha o texto dos dois lados */
+  text-justify: inter-word;     /* Distribui melhor o espaço entre palavras */
+  hyphens: auto;                /* Faz hifenização automática (ajuda na fluidez) */
+  font-size: 0.9rem;            /* Ajuste leve no tamanho */
+  line-height: 1.8;             /* Espaçamento entre linhas agradável */
+  max-width: 700px;             /* Largura máxima pra leitura confortável */
+  margin: 0 auto 30px;          /* Centraliza e adiciona espaçamento inferior */
+  text-align-last: justify;     /* Faz a última linha ficar justificada também */
+}
+
+
+#sobre video {
+  width: 600px;
+  height: auto;
+  border-radius: 25px;
+  overflow: hidden;
+  display: block;
+}
+
+
+
+/* ====== AJUSTES PARA AS CAIXAS EMPRESARIAIS ====== */
+/* ====== BANNERS EMPRESARIAIS ====== */
+#empresarial .banners-container {
+  display: flex;
+  flex-direction: grid;
+  align-items: center;
+  gap: 30px; /* distância entre os banners */
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  min-height: 60vh;
+}
+
+#empresarial .banner {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-shadow: 0 0 5px black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#empresarial-info h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px; /* controla o espaço abaixo do título */
+}
+
+#empresarial-info p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  line-height: 1.8;
+  font-size: 0.9rem;
+  max-width: 700px;
+  margin: 0 auto 30px; /* remove espaço em cima, centraliza e dá um espaçamento embaixo */
+  text-align-last: justify;
+  margin-bottom: -60px; /* controla o espaço abaixo do texto */
+}
+
+
+/* Imagens individuais, igual ao "casamentos" */
+#empresarial .banner.assessoria-bem-estar {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('./bemestar.jpg');
+}
+
+#empresarial .banner.editorial-nemesis {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('./bneme.jpg');
+}
+
+#empresarial .banner:hover {
+  transform: scale(1.05);
+}
+
+
+#empresarial .banner:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+
+
+
+/* Container dos ícones */
+.social-links {
+  display: flex;      /* ícones em linha */
+  gap: 30px;          /* espaçamento */
+  margin-top: 20px;
+}
+
+/* Links de redes sociais */
+.social-links a {
+  display: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+
+.social-links {
+  display: flex;
+  gap: 35px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.social-links a svg {
+  width: 24px;
+  height: 24px;
+  fill: #ffffffd2;
+  transition: transform 0.2s;
+}
+
+
+
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  opacity: 0.7;
+  font-size: 12px;
+  color: #fff;
+  z-index: 99999;
+}
+
+footer a {
+  font-style: italic;
+  color: #006eff; /* cor branca */
+  text-decoration: underline; /* remove sublinhado */
+  font-weight: bold;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+
+/* === ESTILO DAS SETAS DO MODAL === */
+#imageModal #prevImg,
+#imageModal #nextImg, #videoModal .nav-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: fixed !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 15px !important; /* 🔹 tamanho menor do ícone */
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.15) !important; /* 🔹 leve transparência */
+  border: 0cap solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 50% !important; /* 🔹 formato circular */
+  width: 40px !important;  /* 🔹 botão menor */
+  height: 40px !important;
+  cursor: pointer !important;
+  z-index: 10010 !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(8px) saturate(150%) !important; /* 🔹 efeito "vidro" */
+}
+
+#imageModal #prevImg:hover,
+#imageModal #nextImg:hover, #videoModal .nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-50%) scale(1.15) !important;
+}
+
+/* posicionamento lateral */
+#imageModal #prevImg {
+  left: 5% !important;
+}
+#imageModal #nextImg {
+  right: 5% !important;
+}
+
+/* em telas grandes, um pouco mais afastadas */
+@media (min-width: 1200px) {
+  #imageModal #prevImg {
+    left: 8% !important;
+  }
+  #imageModal #nextImg {
+    right: 8% !important;
+  }
+}
+
+/* em celulares, ocultar setas */
+@media (max-width: 768px) {
+  #imageModal #prevImg,
+  #imageModal #nextImg {
+    display: none !important;
+  }
+}
+
+
+
+#videoModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#videoModal.hidden {
+  display: none;
+}
+
+#videoModal video {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #000;
+}
+
+#videoModal .close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+#videoModal .nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+#prevVideo { left: 40px; }
+#nextVideo { right: 40px; }
